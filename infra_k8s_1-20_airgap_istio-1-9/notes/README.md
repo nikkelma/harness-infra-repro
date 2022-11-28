@@ -189,10 +189,10 @@ echo "\
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: chain-${id}-root-gitea
+  name: chain-a-root-gitea
   namespace: gitea
 spec:
-  secretName: chain-${id}-root-gitea-tls
+  secretName: chain-a-root-gitea-tls
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   subject:
@@ -209,10 +209,12 @@ spec:
   dnsNames:
     - gitea.${wildcard_base}
   issuerRef:
-    name: chain-${id}-ca-root
+    name: chain-a-ca-root
     kind: ClusterIssuer
     group: cert-manager.io" \
-    > "certificate_chain-${id}-root-wildcard.yaml"
+    > certificate_chain-a-root-gitea.yaml
+  
+kubectl apply -f certificate_chain-a-root-gitea.yaml
 ```
 
 Istio: create VirtualService
